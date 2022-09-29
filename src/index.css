@@ -1,13 +1,60 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::after,
+*::before {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* body {
+  min-height: 100vh;
+} */
+
+/* General */
+
+.hide {
+  display: none;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-block {
+  display: block;
+}
+
+/* Sign up */
+.form__section,
+.img__section div {
+  height: 37.5rem;
+}
+
+.img__section div {
+  background-image: url("./assets/art.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.create__project form {
+  height: 40rem;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: 14rem;
+  }
+  .create__project {
+    margin-left: 14rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar .sidebar__nav {
+    width: 14rem;
+  }
 }
