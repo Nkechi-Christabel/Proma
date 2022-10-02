@@ -67,8 +67,7 @@ const Login: React.FC<{}> = () => {
       setStatus("error");
       setTimeout(() => {
         toast.error(
-          res.response?.data.message ||
-            "Something went wrong, please try again."
+          res.response?.data.msg || "Something went wrong, please try again."
         );
       }, 2000);
     }
@@ -87,7 +86,7 @@ const Login: React.FC<{}> = () => {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen p-3">
       <div className="flex justify-center items-center h-full shadow-violet-200 drop-shadow-md mx-3">
         <section className="form__section bg-white py-3 md:rounded-l-md max-w-lg w-full">
           <div>

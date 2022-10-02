@@ -55,6 +55,7 @@ export const login =
       });
       return res;
     } catch (err: any) {
+      console.log(err);
       dispatch({
         type: UserActionTypes.CATCH_ERROR,
         payload: err,
@@ -88,6 +89,28 @@ export const clearError = () => {
     dispatch({ type: UserActionTypes.CLEAR_ERROR });
   };
 };
+
+export const logout =
+  () =>
+  async (dispatch: any): Promise<AxiosResponse<any, any>> => {
+    let res: any;
+    try {
+      res = await base.get("/logout");
+      dispatch({
+        type: UserActionTypes.LOGOUT,
+        payload: res.data,
+      });
+      console.log(res);
+      return res;
+    } catch (err: any) {
+      console.log(err);
+      dispatch({
+        type: UserActionTypes.CATCH_ERROR,
+        payload: err,
+      });
+      return (res = err);
+    }
+  };
 
 // export function logout() {
 //   return (dispatch) => {

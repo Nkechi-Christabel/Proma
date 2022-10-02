@@ -31,3 +31,25 @@ export const projectUpload =
       return (res = err);
     }
   };
+
+export const projects =
+  () =>
+  async (dispatch: any): Promise<AxiosResponse<any, any>> => {
+    let res: any;
+    try {
+      res = await base.get("/createProject");
+      dispatch({
+        type: ProjectActionTypes.ALL_PROJECTS,
+        payload: res.data,
+      });
+      console.log(res);
+      return res;
+    } catch (err: any) {
+      console.log(err);
+      dispatch({
+        type: ProjectActionTypes.CATCH_ERROR,
+        payload: err,
+      });
+      return (res = err);
+    }
+  };

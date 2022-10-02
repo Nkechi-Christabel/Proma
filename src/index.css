@@ -48,7 +48,8 @@
   .sidebar {
     width: 14rem;
   }
-  .create__project {
+  .create__project,
+  .profile__project {
     margin-left: 14rem;
   }
 }

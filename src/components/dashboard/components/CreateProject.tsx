@@ -4,22 +4,24 @@ import { Formik } from "formik";
 import { BsCloudUpload } from "react-icons/bs";
 import * as yup from "yup";
 import toast from "react-hot-toast";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { projectUpload } from "../../../redux/actions/projectActions";
 import { useDispatch } from "react-redux";
+import { serialize } from "object-to-formdata";
 
 export interface FormValuesProject {
   title: string;
   image: string;
-  website?: string;
+  website: string;
   gitRepo: string;
   desc: string;
   status: {
-    isInitiating?: boolean;
-    isExecuting?: boolean;
-    isComplete?: boolean;
-    isHosted?: boolean;
+    isInitiating: boolean;
+    isExecuting: boolean;
+    isComplete: boolean;
+    isHosted: boolean;
   };
+  user?: string;
 }
 
 const CreateProject: React.FC<{}> = () => {
@@ -32,6 +34,7 @@ const CreateProject: React.FC<{}> = () => {
     "image/png",
   ];
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
   const [picture, setPicture] = useState<any>("");
 
   const removeImage = () => setPicture("");
@@ -41,7 +44,7 @@ const CreateProject: React.FC<{}> = () => {
       .string()
       .min(2, "Too Short!")
       .max(20, "Too Long!")
-      .required("Title is required"),
+      .required("A project name is required"),
     image: yup
       .mixed()
       .required("A file is required")
@@ -64,8 +67,14 @@ const CreateProject: React.FC<{}> = () => {
     desc: yup
       .string()
       .min(2, "Too Short!")
-      .max(20, "Too Long!")
+      .max(60, "Too Long!")
       .required("A desciption is required"),
+    status: yup.object({
+      isInitiating: yup.boolean().oneOf([true], "This field must be checked"),
+      isExecuting: yup.boolean(),
+      isComplete: yup.boolean(),
+      isHosted: yup.boolean(),
+    }),
   });
 
   const initialValues: FormValuesProject = {
@@ -86,10 +95,7 @@ const CreateProject: React.FC<{}> = () => {
   const handleSubmit = async (values: FormValuesProject) => {
     setStatus("loading");
 
-    const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
+    const formData = serialize(values);
 
     // Get a response from the api call
     const res = await dispatch(projectUpload(formData));
@@ -101,7 +107,7 @@ const CreateProject: React.FC<{}> = () => {
         toast.success("User successfully registered!");
 
         setTimeout(() => {
-          redirect("/dashboard/profile-project");
+          navigate("profileproject");
         }, 3000);
       }, 2000);
     } else {
@@ -114,7 +120,7 @@ const CreateProject: React.FC<{}> = () => {
       }, 2000);
     }
   };
-  console.log(picture.length && URL.createObjectURL(picture.name));
+
   //Changes the text in the register button depending on the status
   const renderSubmitText = (): string => {
     if (status === "idle" || status === "error") {
@@ -147,10 +153,10 @@ const CreateProject: React.FC<{}> = () => {
             >
               <div>
                 <div className="upload_wrapper">
-                  <label title="Upload File" htmlFor="image">
-                    <span className="addArtwork font-semibold">
-                      Upload images of your work
-                    </span>
+                  <span className="addArtwork font-semibold">
+                    Upload images of your work
+                  </span>
+                  <label title="Upload File" htmlFor="fileUpload">
                     <div className="flex justify-center border-slate-400 shadow-lg drop-shadow-lg cursor-pointer py-3 mb-5 mt-3">
                       {" "}
                       <BsCloudUpload className="w-2/12 h-2/6 " />
@@ -158,10 +164,11 @@ const CreateProject: React.FC<{}> = () => {
                   </label>
                   <input
                     className="hidden"
-                    id="image"
+                    id="fileUpload"
                     name="image"
                     type="file"
                     accept="image/*"
+                    onBlur={props.handleBlur}
                     onChange={(e) => {
                       setPicture(
                         e.currentTarget.files && e.currentTarget.files[0]
@@ -172,21 +179,25 @@ const CreateProject: React.FC<{}> = () => {
                       );
                     }}
                   />
-                  <div className="Upload__box">
-                    <img
-                      className="Upload__image"
-                      src={picture.length && URL.createObjectURL(picture.name)}
-                      alt="Project file upload"
-                    />
-                    <button
-                      className="btn upload btn-sm mt-4"
-                      onClick={() => removeImage()}
-                    >
-                      Remove
-                    </button>
-                  </div>
+                  {picture !== "" && (
+                    <div className="flex flex-col phone:w-44 mb-4">
+                      <img
+                        className="w-full"
+                        src={URL.createObjectURL(picture)}
+                        alt="Project file upload"
+                      />
+                      <button
+                        className="mt-4 py-2 px-6  w-full text-white bg-fuchsia-600 rounded"
+                        onClick={() => removeImage()}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  )}
                   {props.errors.image && props.touched.image ? (
-                    <div>{props.errors.image}</div>
+                    <div className="text-red-400 text-sm px-2">
+                      {props.errors.image}
+                    </div>
                   ) : null}
                 </div>
                 <div className="inputText_wrapper md:grid grid-cols-2 gap-y-6 gap-x-8 justify-between">
@@ -195,22 +206,31 @@ const CreateProject: React.FC<{}> = () => {
                     <input
                       type="text"
                       name="title"
+                      onBlur={props.handleBlur}
                       onChange={props.handleChange}
                       value={props.values.title}
                       className="w-full py-2 px-2 mt-1 mb-3 outline-none shadow-sm rounded"
                     />
+                    {props.errors.title && props.touched.title ? (
+                      <div className="text-red-400 text-sm px-2">
+                        {props.errors.title}
+                      </div>
+                    ) : null}
                   </div>
                   <div>
                     <label className="font-semibold">Website link</label>
                     <input
                       type="text"
                       name="website"
+                      onBlur={props.handleBlur}
                       onChange={props.handleChange}
                       value={props.values.website}
                       className="w-full py-2 px-2 mt-1 mb-3 outline-none shadow-sm rounded"
                     />
                     {props.errors.website && props.touched.website ? (
-                      <div>{props.errors.website}</div>
+                      <div className="text-red-400 text-sm px-2">
+                        {props.errors.website}
+                      </div>
                     ) : null}
                   </div>
                   <div>
@@ -218,12 +238,15 @@ const CreateProject: React.FC<{}> = () => {
                     <input
                       type="text"
                       name="gitRepo"
+                      onBlur={props.handleBlur}
                       onChange={props.handleChange}
                       value={props.values.gitRepo}
                       className="w-full py-2 px-2 mt-1 mb-3 outline-none shadow-sm rounded"
                     />
                     {props.errors.gitRepo && props.touched.gitRepo ? (
-                      <div>{props.errors.gitRepo}</div>
+                      <div className="text-red-400 text-sm px-2">
+                        {props.errors.gitRepo}
+                      </div>
                     ) : null}
                   </div>
                   <div>
@@ -233,54 +256,63 @@ const CreateProject: React.FC<{}> = () => {
                       // id="desc"
                       cols={30}
                       rows={10}
+                      onBlur={props.handleBlur}
                       onChange={props.handleChange}
                       value={props.values.desc}
                       placeholder="Write a brief desciption"
                       className="w-full py-2 px-2 mt-1 mb-3 outline-none shadow-sm rounded"
                     ></textarea>
                     {props.errors.desc && props.touched.desc ? (
-                      <div>{props.errors.desc}</div>
+                      <div className="text-red-400 text-sm px-2">
+                        {props.errors.desc}
+                      </div>
                     ) : null}
                   </div>
                   <div className="checkbox_wrapper">
                     <h4 className="font-semibold mb-2">
                       Choose your project stage
                     </h4>
-                    <div className="grid lg:grid-cols-4 sm:grid-cols-2">
-                      <div>
+                    <div className="grid xl:grid-cols-4 sm:grid-cols-2">
+                      <div className="md:pr-3 mb-2">
+                        {/* {props.errors.status.isInitiating &&
+                        props.touched.status.isInitiating ? (
+                          <div className="text-red-400 text-sm px-2">
+                            {props.errors.status.isInitiating}
+                          </div>
+                        ) : null} */}
                         <input
                           type="checkbox"
-                          // id="isInitiating"
                           name="status.isInitiating"
                           checked={props.values.status.isInitiating}
+                          onBlur={props.handleBlur}
                           onChange={props.handleChange}
-                          className="md:mr-1 mb-2"
+                          className="mr-1"
                         />
-                        <label htmlFor="isnitiating" className="">
+                        <label htmlFor="isInitiating" className="">
                           Initiating
                         </label>
                       </div>
-                      <div>
+                      <div className="md:pr-2 mb-2">
                         <input
                           type="checkbox"
-                          // id="isExecuting"
                           name="status.isExecuting"
                           checked={props.values.status.isExecuting}
+                          onBlur={props.handleBlur}
                           onChange={props.handleChange}
-                          className="md:mr-1 md:ml-2 mb-2"
+                          className="mr-1"
                         />
                         <label htmlFor="isExecuting" className="">
                           Executing
                         </label>
                       </div>
-                      <div>
+                      <div className="md:pr-3 mb-2">
                         <input
                           type="checkbox"
                           // id="isComplete"
                           name="status.isComplete"
                           checked={props.values.status.isComplete}
                           onChange={props.handleChange}
-                          className="md:mr-1 md:ml-3 mb-2"
+                          className="mr-1"
                         />
                         <label htmlFor="isComplete" className="">
                           Completed
@@ -293,7 +325,7 @@ const CreateProject: React.FC<{}> = () => {
                           name="status.isHosted"
                           checked={props.values.status.isHosted}
                           onChange={props.handleChange}
-                          className="md:mr-1 md:ml-3 mb-2"
+                          className="mb-2 mr-1"
                         />
                         <label htmlFor="isHosted" className="">
                           Hosted
@@ -305,10 +337,11 @@ const CreateProject: React.FC<{}> = () => {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className={`py-2 px-4 my-5 text-white font-semibold bg-purple-500 hover:bg-fuchsia-700 rounded ${
-                      status === "loading" && "animate-spin"
-                    }`}
+                    className="py-2 px-6 my-5 text-white font-semibold bg-purple-500 hover:bg-fuchsia-700 rounded"
                   >
+                    {status === "loading" && (
+                      <span className="animate-spin rounded-full inline-block border-2 border-zinc-300 w-5 mr-2"></span>
+                    )}
                     {renderSubmitText()}
                   </button>
                 </div>

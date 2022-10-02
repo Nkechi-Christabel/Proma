@@ -1,8 +1,9 @@
 import { ProjectActionTypes } from "../constants/actionTypes";
 
 const initialState = {
-  // loading: true,
+  loading: true,
   project: [],
+  projects: [],
 };
 
 export const projectsReducers = (
@@ -13,13 +14,15 @@ export const projectsReducers = (
     case ProjectActionTypes.PROJECT_UPLOAD:
       return {
         ...state,
+        loading: false,
         signup: payload,
       };
-    // case UserActionTypes.USER_LOGIN:
-    //   return {
-    //     ...state,
-    //     login: payload,
-    //   };
+    case ProjectActionTypes.ALL_PROJECTS:
+      return {
+        ...state,
+        loading: false,
+        projects: payload,
+      };
     // case UserActionTypes.USER:
     //   return {
     //     ...state,

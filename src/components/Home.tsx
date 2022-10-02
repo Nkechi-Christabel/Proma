@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
 import Logo from "../assets/logo.png";
 import Illustration from "../assets/illustration.png";
-import { InitialState } from "../redux/store";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../redux/actions/userActions";
+// import { InitialState } from "../redux/store";
+// import { useSelector } from "react-redux";
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch<any>();
   const [checked, setChecked] = useState<boolean>(false);
-  const { login } = useSelector((state: InitialState) => state.userInfo);
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+  // const { login } = useSelector((state: InitialState) => state.userInfo);
 
   return (
-    <div>
+    <div className="px-6">
       <header>
-        <div className="flex justify-between container mx-auto max-w-7xl pt-9 px-2 relative">
+        <div className="flex justify-between container mx-auto max-w-7xl pt-9  relative">
           <div>
             <Link to="/">
               <img src={Logo} alt="logo" className="w-12 inline-block" />
@@ -47,24 +41,22 @@ const Home: React.FC = () => {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="mr-10 py-2 md:py-0  tracking-wide hover:text-fuchsia-700">
-                  <Link to={login.email ? "/dashboard" : "/login"}>
-                    Dashboard
-                  </Link>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li className="mr-10 pt-2 pb-0 md:py-0  tracking-wide hover:text-fuchsia-700">
-                  <Link to="/signup">Signup</Link>
+                  <Link to="/login">Login</Link>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
         <nav
-          className={`navbar__smallScreen bg-gradient-to-r from-red-50 via-red-100 to-fuchsia-200 text-gray-600 absolute z-10 left-0 top-0 transition-all duration-150 ease-in w-full h-3/6 ${
+          className={`navbar__smallScreen bg-gradient-to-r from-red-50 via-red-100 to-fuchsia-200 text-gray-600 absolute z-10 left-0 top-0 hidden transition-shadow w-full h-3/6 ${
             checked ? "d-block" : "hide"
           }`}
         >
           <ul
-            className={`mx-5 md:hidden pt-8 flex-col justify-center items-center w-full text-xl font- font-bold text-gray-600 ${
+            className={`mx-5 md:hidden pt-8 flex-col justify-center items-center w-full h-full text-xl font- font-bold text-gray-600 ${
               checked ? "d-flex" : "hide"
             }`}
           >
@@ -75,7 +67,7 @@ const Home: React.FC = () => {
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li className="mr-10 pt-2 pb-0 md:py-0 tracking-wide hover:tracking-wider hover:text-fuchsia-700">
-              <Link to="/signup">Signup</Link>
+              <Link to="/login">Login</Link>
             </li>
           </ul>
         </nav>

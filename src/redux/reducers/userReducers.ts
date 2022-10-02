@@ -6,6 +6,7 @@ const initialState = {
   signup: [],
   login: [],
   user: [],
+  logout: [],
 };
 
 export const userReducers = (
@@ -26,20 +27,23 @@ export const userReducers = (
     case UserActionTypes.USER:
       return {
         ...state,
-        user: payload,
+        user: [...payload],
       };
-    case UserActionTypes.LOGOUT:
-      return {
-        ...initialState,
-      };
+
     case UserActionTypes.CATCH_ERROR:
       return {
         error: payload,
       };
+
     case UserActionTypes.CLEAR_ERROR:
       return {
         ...state,
         error: [],
+      };
+    case UserActionTypes.LOGOUT:
+      return {
+        ...initialState,
+        logout: payload,
       };
     default:
       return state;
