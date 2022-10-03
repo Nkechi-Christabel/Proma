@@ -48,9 +48,6 @@ app.use(logger("dev"));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Use flash messages for errors, info, ect...
-app.use(flash());
-
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 //Server Running
 app.listen(process.env.PORT, () => {

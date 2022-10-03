@@ -4,7 +4,6 @@ const Project = require("../models/Project");
 const mongoose = require("mongoose");
 
 module.exports.createProject = async (req, res) => {
-  console.log(req.user);
   try {
     // Upload image to cloudinary
     const upload = await cloudinary.uploader.upload(req.file.path);

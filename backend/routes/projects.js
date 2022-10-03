@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
 const projectsController = require("../controllers/projects");
-// const authenticated = require("../middleware/auth")
-const passport = require("../config/passport");
 
 router.post(
   "/createProject",
