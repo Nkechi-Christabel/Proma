@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
   title: {
@@ -25,8 +25,7 @@ const ProjectSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+    ref: 'users',
   },
   date: {
     type: Date,
@@ -35,7 +34,7 @@ const ProjectSchema = new Schema({
 });
 
 //removes the prefix from _id and delete '_v'
-ProjectSchema.set("toJSON", {
+ProjectSchema.set('toJSON', {
   transform: (document, returnedObj) => {
     returnedObj.id = returnedObj._id.toString();
     delete returnedObj._id;
@@ -43,4 +42,4 @@ ProjectSchema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Project", ProjectSchema);
+module.exports = mongoose.model('Project', ProjectSchema);

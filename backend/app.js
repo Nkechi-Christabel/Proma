@@ -1,24 +1,21 @@
 const express = require("express");
 const passport = require("passport/lib");
+const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const flash = require("express-flash");
+// const flash = require('express-flash');
 const logger = require("morgan");
-const connectDB = require("./config/database");
 const app = express();
+const path = require("path");
 const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 const mainRoutes = require("./routes/main");
 const projectRoutes = require("./routes/projects");
+const passportConfig = require("./config/passport")(passport);
 
-//Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
+require("./config/database");
 
-// // Passport config
-require("./config/passport")(passport);
-
-//Connect To Database
-connectDB();
+dotenv.config({ path: path.join(__dirname, "./config/.env") });
 
 app.use(cors());
 
@@ -36,7 +33,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: "mongodb+srv://Nk:pro123@projects.oyhzdlk.mongodb.net/projects",
+      mongoUrl: process.env.DB_STRING,
     }),
   })
 );
@@ -48,12 +45,19 @@ app.use(logger("dev"));
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Use flash messages for errors, info, ect...
+app.use(flash());
+
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
+//Routes
+app.get("/healthcheck", (_, res) =>
+  res.status(200).json({ success: true, message: "Server up" })
+);
+
+app.use("/", mainRoutes);
+app.use("/projects", projectRoutes);
+
 //Server Running
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}, you better catch it!`);
 });
-
-//Routes
-app.use("/", mainRoutes);
-app.use("/project", projectRoutes);

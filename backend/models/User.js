@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema(
   {
@@ -8,21 +8,21 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       // lowercase: true,
-      match: [/[0-9A-Za-z\s]+/, "is invalid"],
+      match: [/[0-9A-Za-z\s]+/, 'is invalid'],
       index: true,
     },
     email: {
       type: String,
-      required: [true, "Please enter an email"],
+      required: [true, 'Please enter an email'],
       lowercase: true,
-      match: [/\S+@\S+\.\S+/, "is invalid"],
+      match: [/\S+@\S+\.\S+/, 'is invalid'],
       index: true,
       unique: true,
     },
     password: {
       type: String,
-      minlength: [8, "Minimum password length is 6 characters"],
-      required: [true, "Please enter a password"],
+      minlength: [8, 'Minimum password length is 6 characters'],
+      required: [true, 'Please enter a password'],
     },
     date: {
       type: Date,
@@ -33,20 +33,21 @@ const UserSchema = new Schema(
 );
 
 //removes the prefix from _id and delete '_v'
-UserSchema.set("toJSON", {
+UserSchema.set('toJSON', {
   transform: (document, returnedObj) => {
     returnedObj.id = returnedObj._id.toString();
     delete returnedObj._id;
+    delete returnedObj.password;
     delete returnedObj.__v;
   },
 });
 
 // Password hash middleware.
 
-UserSchema.pre("save", function save(next) {
+UserSchema.pre('save', function save(next) {
   const user = this;
   // only hash the password if it has been modified (or is new)
-  if (!user.isModified("password")) {
+  if (!user.isModified('password')) {
     return next();
   }
   // generate a salt
@@ -78,4 +79,4 @@ UserSchema.methods.comparePassword = function comparePassword(
   });
 };
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

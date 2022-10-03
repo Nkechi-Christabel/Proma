@@ -1,15 +1,17 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const upload = require("../middleware/multer");
-const projectsController = require("../controllers/projects");
+const upload = require('../middleware/multer');
+const projectsController = require('../controllers/projects');
+const { ensureAuth } = require('../middleware/auth');
 
 router.post(
-  "/createProject",
-  upload.single("image"),
+  '/',
+  ensureAuth,
+  upload.single('image'),
   projectsController.createProject
 );
-router.get("/profileProject", projectsController.profile);
-router.get("/singleProject", projectsController.createProject);
-router.get("/allProjects", projectsController.allProjects);
+
+router.get('/:id', ensureAuth, projectsController.singleProject);
+router.get('/', ensureAuth, projectsController.allUserProjects);
 
 module.exports = router;

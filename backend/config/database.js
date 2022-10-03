@@ -1,22 +1,24 @@
-const mongoose = require("mongoose");
-const express = require("express");
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const path = require('path');
 
-const app = express();
+dotenv.config({ path: path.join(__dirname, '.env') });
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.DB_STRING, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      // useFindAndModify: false,
-      // useCreateIndex: true,
-    });
-  
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-};
+mongoose.connect(process.env.DB_STRING);
 
-module.exports = connectDB;
+mongoose.connection.on('connected', () => console.log('Mongoose connected'));
+mongoose.connection.on('error', (err) => console.log(err));
+
+mongoose.connection.on('disconnected', () =>
+  console.log('Mongoose disconnected')
+);
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
+    console.log(
+      'Mongoose default connection disconnected through app termination'
+    );
+    process.exit(0);
+  });
+});
+
+module.exports = mongoose;
