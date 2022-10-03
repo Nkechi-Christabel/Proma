@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, redirect } from "react-router-dom";
-
 import { BiArchiveOut, BiLogOut } from "react-icons/bi";
 import { VscProject } from "react-icons/vsc";
 import { RiProjectorLine } from "react-icons/ri";
@@ -22,7 +21,7 @@ const Sidebar: React.FC<Props> = ({ checked }) => {
   };
 
   return (
-    <div
+    <section
       className={`sidebar bg-black bg-opacity-40 md:bg-gradient-to-br from-fuchsia-500 to-fuchsia-900 hidden md:block w-full h-full fixed left-0 bottom-0 top-16 z-20 overflow-hidden ${
         checked ? "d-block" : "hide"
       }
@@ -67,7 +66,7 @@ const Sidebar: React.FC<Props> = ({ checked }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

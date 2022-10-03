@@ -2,12 +2,12 @@ import React, { useState } from "react";
 // import { useFormik } from "formik";
 import { Formik } from "formik";
 import { BsCloudUpload } from "react-icons/bs";
-import * as yup from "yup";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { projectUpload } from "../../../redux/actions/projectActions";
 import { useDispatch } from "react-redux";
 import { serialize } from "object-to-formdata";
+import * as yup from "yup";
+import toast from "react-hot-toast";
 
 export interface FormValuesProject {
   title: string;
@@ -180,7 +180,7 @@ const CreateProject: React.FC<{}> = () => {
                     }}
                   />
                   {picture !== "" && (
-                    <div className="flex flex-col phone:w-44 mb-4">
+                    <div className="flex flex-col phone:w-44 mb-4 drop-shadow">
                       <img
                         className="w-full"
                         src={URL.createObjectURL(picture)}

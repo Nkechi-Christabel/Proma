@@ -6,15 +6,17 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import "./index.css";
+import { InitialState } from "./redux/store";
+import { getUser } from "./redux/actions/userActions";
+
 import CreateProject from "./components/dashboard/components/CreateProject";
 import Dashboard from "./components/dashboard/components/Dashboard";
 import ProfileProject from "./components/dashboard/components/ProfileProject";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import "./index.css";
-import { InitialState } from "./redux/store";
-import { getUser } from "./redux/actions/userActions";
+import Layout from "./components/Layout";
 
 const App: React.FC = () => {
   const dispatch = useDispatch<any>();
@@ -27,21 +29,21 @@ const App: React.FC = () => {
   return (
     <div className="App h-full">
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/Login" element={<Login />} />
-          <Route
-            path="/Dashboard"
-            element={
-              login?.email ? <Dashboard /> : <Navigate replace to="/login" />
-            }
-          >
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/Login" element={<Login />} />
+            <Route
+              path="/Dashboard"
+              element={
+                login?.email ? <Dashboard /> : <Navigate replace to="/login" />
+              }
+            />
             <Route path="CreateProject" element={<CreateProject />} />
             <Route path="ProfileProject" element={<ProfileProject />} />
-          </Route>
-          {/* <Route path="/CreateProject" element={<CreateProject />} /> */}
-        </Routes>
+          </Routes>
+        </Layout>
       </Router>
     </div>
   );

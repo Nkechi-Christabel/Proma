@@ -9,8 +9,9 @@ import * as yup from "yup";
 import Tilt from "react-parallax-tilt";
 import Logo from "../assets/logo.png";
 // import { InitialState } from "../redux/store";
-import { signup } from "../redux/actions/userActions";
 // import { Dispatch } from "redux";
+
+import { signup } from "../redux/actions/userActions";
 
 export interface FormValuesSignup {
   name: string;
