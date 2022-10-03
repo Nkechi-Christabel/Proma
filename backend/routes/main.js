@@ -3,6 +3,7 @@ const router = express.Router();
 const authController = require("../controllers/auth");
 
 //Main Routes - simplified for now
+
 // router.get("/", homeController.getIndex);
 // router.get("/profile", ensureAuth, postsController.getProfile);
 // router.get("/feed", ensureAuth, postsController.getFeed);

@@ -3,23 +3,13 @@ const Project = require("../models/Project");
 
 const mongoose = require("mongoose");
 
-// Project.find({})
-//   .populate("user")
-//   .exec((err, result) => {
-//     if (err) {
-//       // res.status(500).json({ message: err });
-//       console.log(err);
-//     }
-//     // res.status(200).json(result);
-//     console.log(result);
-//   });
-
 module.exports.createProject = async (req, res) => {
+  console.log(req.user);
   try {
     // Upload image to cloudinary
     const upload = await cloudinary.uploader.upload(req.file.path);
 
-    const data = await Project.create({
+    const data = new Project({
       title: req.body.title,
       image: upload.secure_url,
       cloudinaryId: upload.public_id,
@@ -30,11 +20,12 @@ module.exports.createProject = async (req, res) => {
         isExecuting: req.body.status.isExecuting,
         isComplete: req.body.status.isComplete,
         isHosted: req.body.status.isHosted,
-        user: users._id,
       },
+      // user: req.user.id,
     });
+    const result = await data.save();
 
-    res.status(201).json(data);
+    res.status(201).json(result);
   } catch (err) {
     res.status(500).json(err.message);
   }

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const ProjectSchema = new Schema({
   title: {
@@ -23,9 +23,10 @@ const ProjectSchema = new Schema({
     isComplete: Boolean,
     isHosted: Boolean,
   },
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
+    required: true,
   },
   date: {
     type: Date,
