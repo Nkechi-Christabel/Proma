@@ -1,52 +1,63 @@
 const express = require("express");
-const passport = require("passport/lib");
-const dotenv = require("dotenv");
-const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+// const jwt = require("jsonwebtoken");
+// const config = require("./config/passportConfig");
+// const session = require("express-session");
 const MongoStore = require("connect-mongo");
-// const flash = require('express-flash');
 const logger = require("morgan");
 const app = express();
-const path = require("path");
-const PORT = process.env.PORT || 8000;
+// const path = require("path");
 const cors = require("cors");
 const mainRoutes = require("./routes/main");
 const projectRoutes = require("./routes/projects");
-const passportConfig = require("./config/passport")(passport);
-
+const dotenv = require("dotenv");
+const path = require("path");
+dotenv.config({ path: path.join(__dirname, "../config/.env") });
 require("./config/database");
+require("./config/passport");
 
-dotenv.config({ path: path.join(__dirname, "./config/.env") });
+//Cross-browser-origin
+const corsOptions = {
+  origin: "http://localhost:3000" || process.env.PORT,
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
-app.use(cors());
+//Logging in the console
+app.use(logger("dev"));
+
+//Static Folder
+app.use(express.static("public"));
+
+//Pass a secret to sign the secured http cookie
+app.use(cookieParser());
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Static Folder
-app.use(express.static("public"));
-
-// Setup Sessions - stored in MongoDB
-app.use(
-  session({
-    secret: "kitty cat",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.DB_STRING,
-    }),
-  })
-);
-
-//Logging in the console
-app.use(logger("dev"));
+//Setup Sessions - stored in MongoDB
+// app.use(
+//   session({
+//     secret: process.env.SECRET || "ykkiatcen",
+//     resave: true,
+//     saveUninitialized: false,
+//     cookie: {
+//       secure: true,
+//       maxAge: 1000 * 60 * 60 * 24,
+//       httpOnly: true,
+//     },
+//     store: MongoStore.create({
+//       mongoUrl: process.env.DB_STRING,
+//     }),
+//   })
+// );
 
 // Passport middleware
 app.use(passport.initialize());
-app.use(passport.session());
-
-//Use flash messages for errors, info, ect...
-app.use(flash());
+// app.use(passport.session());
 
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 //Routes
@@ -58,6 +69,8 @@ app.use("/", mainRoutes);
 app.use("/projects", projectRoutes);
 
 //Server Running
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}, you better catch it!`);
+app.listen(process.env.PORT, () => {
+  console.log(
+    `Server is running on port ${process.env.PORT}, you better catch it!`
+  );
 });

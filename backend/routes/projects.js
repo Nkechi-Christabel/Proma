@@ -1,17 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const upload = require('../middleware/multer');
-const projectsController = require('../controllers/projects');
-const { ensureAuth } = require('../middleware/auth');
+const upload = require("../middleware/multer");
+const projectsController = require("../controllers/projects");
+const passport = require("passport");
 
 router.post(
-  '/',
-  ensureAuth,
-  upload.single('image'),
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
   projectsController.createProject
 );
 
-router.get('/:id', ensureAuth, projectsController.singleProject);
-router.get('/', ensureAuth, projectsController.allUserProjects);
+// router.get(
+//   "/:id",
+//   passport.authenticate("jwt", { session: false }),
+//   projectsController.singleProject
+// );
+router.get(
+  "/userProjects",
+  passport.authenticate("jwt", { session: false }),
+  projectsController.userProjects
+);
 
 module.exports = router;

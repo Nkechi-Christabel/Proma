@@ -1,28 +1,16 @@
-const cloudinary = require('../middleware/cloudinary');
-const Project = require('../models/Project');
+const cloudinary = require("../middleware/cloudinary");
+const Project = require("../models/Project");
 
-const mongoose = require('mongoose');
-
-// Project.find({})
-//   .populate("user")
-//   .exec((err, result) => {
-//     if (err) {
-//       // res.status(500).json({ message: err });
-//       console.log(err);
-//     }
-//     // res.status(200).json(result);
-//     console.log(result);
-//   });
-
+//Create a new project
 module.exports.createProject = async (req, res) => {
   try {
     // Upload image to cloudinary
-    // const upload = await cloudinary.uploader.upload(req.file.path);
+    const upload = await cloudinary.uploader.upload(req.file.path);
 
     const data = await Project.create({
       title: req.body.title,
-      image: 'upload.secure_url',
-      cloudinaryId: 'upload.public_id',
+      image: upload.secure_url,
+      cloudinaryId: upload.public_id,
       website: req.body.website,
       gitRepo: req.body.gitRepo,
       status: {
@@ -33,36 +21,27 @@ module.exports.createProject = async (req, res) => {
       },
       user: req.user._id,
     });
-
+    Project.findOne({ user: req.user._id })
+      .populate("users")
+      .exec((err, posts) => {
+        console.log("Populated User " + posts);
+      });
     res.status(201).json(data);
   } catch (err) {
     res.status(500).json(err.message);
   }
 };
 
-module.exports.allUserProjects = async (req, res) => {
+//get user's posted project/projects
+module.exports.userProjects = async (req, res) => {
   try {
     const data = await Project.find({ user: req.user._id })
-      .sort({ createdAt: 'asc' })
-      .lean();
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-module.exports.singleProject = async (req, res) => {
-  try {
-    const data = await Project.findOne({
-      _id: req.params.id,
-      user: req.user._id,
-    })
-      .sort({ createdAt: 'desc' })
+      .sort({ createdAt: "asc" })
       .lean();
     if (!data)
       return res
         .status(404)
-        .json({ success: false, message: 'Project not found' });
+        .json({ success: false, message: "User's Projects not found" });
 
     res.status(200).json(data);
   } catch (err) {
@@ -70,11 +49,31 @@ module.exports.singleProject = async (req, res) => {
   }
 };
 
-module.exports.profile = async (req, res) => {
-  try {
-    const data = await Project.find(req.id).lean();
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+//Gets a single project by id
+// module.exports.singleProject = async (req, res) => {
+//   try {
+//     const data = await Project.findOne({
+//       _id: req.params.id,
+//       user: req.user._id,
+//     })
+//       .sort({ createdAt: "desc" })
+//       .lean();
+//     if (!data)
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Project not found" });
+
+//     res.status(200).json(data);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
+
+// module.exports.profile = async (req, res) => {
+//   try {
+//     const data = await Project.find(req.id).lean();
+//     res.status(200).json(data);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
