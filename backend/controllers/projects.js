@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Project = require("../models/Project");
+// const ObjectId = require("mongodb").ObjectId;
 
 //Create a new project
 module.exports.createProject = async (req, res) => {
@@ -7,7 +8,7 @@ module.exports.createProject = async (req, res) => {
     // Upload image to cloudinary
     const upload = await cloudinary.uploader.upload(req.file.path);
 
-    const data = await Project.create({
+    await Project.create({
       title: req.body.title,
       image: upload.secure_url,
       cloudinaryId: upload.public_id,
@@ -21,12 +22,11 @@ module.exports.createProject = async (req, res) => {
       },
       user: req.user._id,
     });
-    Project.findOne({ user: req.user._id })
-      .populate("users")
-      .exec((err, posts) => {
-        console.log("Populated User " + posts);
-      });
-    res.status(201).json(data);
+    const result = await Project.findOne({ user: req.user._id }).populate(
+      "user"
+    );
+    console.log("this is the result", result);
+    res.status(201).json(result);
   } catch (err) {
     res.status(500).json(err.message);
   }
@@ -48,7 +48,6 @@ module.exports.userProjects = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
 //Gets a single project by id
 // module.exports.singleProject = async (req, res) => {
 //   try {
