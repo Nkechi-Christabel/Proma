@@ -10,14 +10,23 @@ router.post(
   upload.single("image"),
   projectsController.createProject
 );
-
-// router.get(
-//   "/:id",
-//   passport.authenticate("jwt", { session: false }),
-//   projectsController.singleProject
-// );
 router.get(
   "/userProjects",
+  passport.authenticate("jwt", { session: false }),
+  projectsController.userProjects
+);
+router.get(
+  "/:id",
+  // passport.authenticate("jwt", { session: false }),
+  projectsController.singleProject
+);
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  projectsController.userProjects
+);
+router.put(
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   projectsController.userProjects
 );
