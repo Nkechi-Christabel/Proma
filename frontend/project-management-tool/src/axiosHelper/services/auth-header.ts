@@ -1,6 +1,5 @@
 export const authHeader = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
-  // console.log(user);
 
   if (user && user.token) {
     // for Node.js Express back-end

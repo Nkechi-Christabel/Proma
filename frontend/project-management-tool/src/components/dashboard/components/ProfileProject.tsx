@@ -15,8 +15,6 @@ const ProfileProject: React.FC = () => {
     (state: InitialState) => state.projects
   );
 
-  console.log(value);
-
   //getting status that are true
   const searchFilter = userProjects?.filter((project: any) =>
     project.title.toLowerCase().includes(value)
@@ -46,7 +44,7 @@ const ProfileProject: React.FC = () => {
               />
             </div>
             <div className="flip-card-back bg-zinc-300 text-stone-700 flex flex-col justify-center h-full">
-              <h1 className="font-semibold">{pro.title}</h1>
+              <h2 className="font-semibold">{pro.title}</h2>
               <p className="pt-4 font-semibold text-ellipsis">
                 Website: {pro.website}
               </p>
@@ -115,7 +113,7 @@ const ProfileProject: React.FC = () => {
           )}
           {userProjects?.length > 0 && (
             <div className="h-full p-5">
-              <h2 className="font-bold text-2xl text-center text-stone-800 tracking-wide pb-4">
+              <h2 className="font-bold text-xl text-center text-stone-800 tracking-wide pb-4">
                 Individual projects
               </h2>
               <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-10">

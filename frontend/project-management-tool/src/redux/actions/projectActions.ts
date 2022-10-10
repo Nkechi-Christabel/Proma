@@ -18,10 +18,9 @@ export const projectUpload =
         type: ProjectActionTypes.PROJECT_UPLOAD,
         payload: res.data,
       });
-      console.log(res);
+
       return res;
     } catch (err: any) {
-      console.log(err);
       dispatch({
         type: ProjectActionTypes.CATCH_ERROR,
         payload: err,
@@ -41,10 +40,9 @@ export const userProject =
         type: ProjectActionTypes.USER_PROJECTS,
         payload: res.data,
       });
-      // console.log(res);
+
       return res;
     } catch (err: any) {
-      // console.log(err);
       dispatch({
         type: ProjectActionTypes.CATCH_ERROR,
         payload: err,
@@ -64,10 +62,9 @@ export const allProjects =
         type: ProjectActionTypes.ALL_PROJECTS,
         payload: res.data,
       });
-      // console.log(res);
+
       return res;
     } catch (err: any) {
-      console.log(err);
       dispatch({
         type: ProjectActionTypes.CATCH_ERROR,
         payload: err,
@@ -87,10 +84,10 @@ export const singleProject =
         type: ProjectActionTypes.SINGLE_PROJECT,
         payload: res.data,
       });
-      // console.log(res.data);
+      console.log(res);
       return res;
     } catch (err: any) {
-      // console.log(err);
+      console.log(err);
       dispatch({
         type: ProjectActionTypes.CATCH_ERROR,
         payload: err,
@@ -110,10 +107,9 @@ export const deleteProject =
         type: ProjectActionTypes.DELETE_PROJECT,
         payload: res.data,
       });
-      console.log(res);
+
       return res;
     } catch (err: any) {
-      console.log(err);
       dispatch({
         type: ProjectActionTypes.CATCH_ERROR,
         payload: err,
@@ -133,10 +129,8 @@ export const updateProject =
         type: ProjectActionTypes.UPDATE_PROJECT,
         payload: res.data,
       });
-      console.log(res.data);
       return res;
     } catch (err: any) {
-      console.log(err);
       dispatch({
         type: ProjectActionTypes.CATCH_ERROR,
         payload: err,

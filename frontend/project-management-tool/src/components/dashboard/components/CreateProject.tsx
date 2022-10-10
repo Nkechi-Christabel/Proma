@@ -153,7 +153,6 @@ const CreateProject: React.FC<{}> = () => {
         initialValues={initialValues}
         validationSchema={reviewSchema}
         onSubmit={(values, actions) => {
-          console.log(values);
           actions.resetForm();
           handleSubmit(values);
         }}

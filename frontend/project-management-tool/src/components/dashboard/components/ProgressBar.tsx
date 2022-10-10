@@ -11,10 +11,6 @@ const ProgressBar = () => {
   const complete = aProject?.status.isComplete;
   const hosted = aProject?.status.isHosted;
 
-  //   console.log("executing", aProject);
-
-  //   console.log(complete, executing);
-
   useEffect(() => {
     setProgress((prev) =>
       hosted && initiating

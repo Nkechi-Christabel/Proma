@@ -15,9 +15,7 @@ const Projects: React.FC = () => {
     (state: InitialState) => state.projects
   );
 
-  const { loggedIn } = useSelector((state: InitialState) => state.userInfo);
-
-  console.log(loggedIn);
+  //   const { loggedIn } = useSelector((state: InitialState) => state.userInfo);
 
   //getting status that are true
   const searchFilter = projects?.filter((project: any) =>
@@ -113,7 +111,7 @@ const Projects: React.FC = () => {
           )}
           {projects?.length > 0 && (
             <div className="h-full p-5">
-              <h1 className="font-bold text-2xl text-stone-800 text-center tracking-wide pb-5">
+              <h1 className="font-bold text-xl text-stone-800 text-center tracking-wide pb-5">
                 All Projects
               </h1>
               <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-10">

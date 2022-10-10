@@ -14,13 +14,19 @@ import ProgressBar from "./ProgressBar";
 const ProjectDetails = () => {
   const [cancel, setCancel] = useState(false);
   const [del, setDel] = useState(false);
-  const { id } = useParams();
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const { aProject, loading, error } = useSelector(
     (state: InitialState) => state.projects
   );
   const { loggedIn } = useSelector((state: InitialState) => state.userInfo);
+
+  useEffect(() => {
+    dispatch(singleProject(id));
+  }, [dispatch, id]);
 
   //Cleaning up and changing the date format
   const newDate = new Date(
@@ -29,19 +35,16 @@ const ProjectDetails = () => {
 
   const confirmUser = loggedIn?.user.id === aProject?.user?._id;
 
-  useEffect(() => {
-    dispatch(singleProject(id));
-  }, [dispatch, id]);
-
   const handleDeleteYes = async () => {
     setCancel(true);
+    setDeleteLoading(true);
     const res = await dispatch(deleteProject(id));
 
     //Display a message according to the response status
     if (res?.status === 200) {
       setTimeout(() => {
+        setDeleteLoading(false);
         toast.success("Project deleted!");
-
         setTimeout(() => {
           navigate("/dashboard/profile-project");
         }, 3000);
@@ -176,6 +179,9 @@ const ProjectDetails = () => {
                     }`}
                     onClick={() => handleDeleteIcon()}
                   />
+                  {deleteLoading && (
+                    <span className="animate-spin rounded-full inline-block border-2 border-violet-700  w-5 ml-4"></span>
+                  )}
                 </div>
               </div>
             </div>

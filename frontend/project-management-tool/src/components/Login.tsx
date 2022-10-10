@@ -21,8 +21,7 @@ const Login: React.FC<{}> = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const [status, setStatus] = useState<string>("idle");
-  // const { loggedIn } = useSelector((state: InitialState) => state.userInfo);
-  // console.log("It is login", loggedIn);
+  
 
   // form validation
   const reviewSchema = yup.object({

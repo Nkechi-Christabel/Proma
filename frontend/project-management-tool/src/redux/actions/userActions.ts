@@ -47,10 +47,8 @@ export const login =
         type: UserActionTypes.USER_LOGIN,
         payload: res.data,
       });
-      console.log(res);
       return res;
     } catch (err: any) {
-      console.log(err);
       dispatch({
         type: UserActionTypes.CATCH_ERROR,
         payload: err,
