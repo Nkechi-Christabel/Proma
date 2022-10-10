@@ -68,27 +68,11 @@ module.exports.postSignup = async (req, res, next) => {
   const user = await User.create(req.body);
 
   return res.status(201).json(user);
-
-  // req.logIn(user, (err) => {
-  //   if (err) {
-  //     return res.status(400).json({ message: err.message });
-  //   }
-
-  // });
 };
 
 module.exports.logout = (req, res) => {
   req.logout(() => {
-    console.log("User has logged out.");
     res.status(200).json({ message: "User has successfully logged out." });
   });
 };
 
-// //gets the logged in user
-// module.exports.getUser = (req, res) => {
-//   res.json({
-//     message: "You made it to the secure route",
-//     user: req.user,
-//     token: req.query.secret_token,
-//   });
-// };
