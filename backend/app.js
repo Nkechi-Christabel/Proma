@@ -1,8 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-// const jwt = require("jsonwebtoken");
-// const config = require("./config/passportConfig");
+
 // const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const logger = require("morgan");

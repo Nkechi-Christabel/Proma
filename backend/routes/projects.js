@@ -17,11 +17,7 @@ router.get(
 );
 
 router.get("/allProjects", projectsController.allProjects);
-router.get(
-  "/:id",
-  // passport.authenticate("jwt", { session: false }),
-  projectsController.singleProject
-);
+router.get("/:id", projectsController.singleProject);
 router.delete(
   "/delete/:id",
   passport.authenticate("jwt", { session: false }),

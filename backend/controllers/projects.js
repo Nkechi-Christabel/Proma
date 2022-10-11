@@ -1,6 +1,5 @@
 const cloudinary = require("../middleware/cloudinary");
 const Project = require("../models/Project");
-// const ObjectId = require("mongodb").ObjectId;
 
 //Create a new project
 module.exports.createProject = async (req, res) => {
@@ -33,7 +32,7 @@ module.exports.createProject = async (req, res) => {
 // Project.find()
 //   .populate("user")
 //   .then((project) => console.log("this is the result", project))
-//   .catch((error) => console.log(error))
+//   .catch((error) => console.log(error));
 
 //get user's posted project/projects
 module.exports.userProjects = async (req, res) => {

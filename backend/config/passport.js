@@ -46,7 +46,7 @@ passport.use(
 //     token = req.cookies["access_token"];
 //   }
 //   return token;
-// };
+// }
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();

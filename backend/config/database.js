@@ -12,6 +12,7 @@ mongoose.connection.on("error", (err) => console.log(err));
 mongoose.connection.on("disconnected", () =>
   console.log("Mongoose disconnected")
 );
+
 process.on("SIGINT", () => {
   mongoose.connection.close(() => {
     console.log(

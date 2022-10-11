@@ -43,7 +43,6 @@ UserSchema.set("toJSON", {
 });
 
 // Password hash middleware.
-
 UserSchema.pre("save", function save(next) {
   const user = this;
   // only hash the password if it has been modified (or is new)
