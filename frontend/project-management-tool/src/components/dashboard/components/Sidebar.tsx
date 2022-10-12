@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { BiArchiveOut, BiLogOut } from "react-icons/bi";
 import { VscProject } from "react-icons/vsc";
 import { RiProjectorLine } from "react-icons/ri";
-import { logout } from "../../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
+import Logo from "../../../assets/logo.png";
+import { logout } from "../../../redux/actions/userActions";
 
 interface Props {
   checked: boolean;
@@ -25,10 +26,18 @@ const Sidebar: React.FC<Props> = ({ checked }) => {
       }`}
     >
       <div className="sidebar__nav md-bg-transparent bg-gradient-to-br from-fuchsia-500 to-fuchsia-900 h-full pt-6 ">
+        <div className="md:hidden block mb-5">
+          <Link to="/">
+            <img src={Logo} alt="logo" className="w-12 inline-block" />
+            <span className="inline-block align-middle font-bold text-stone-700 text-xl mt-1">
+              Proma
+            </span>
+          </Link>
+        </div>
         <nav className="navbar text-stone-200 ">
           <ul className="px-3">
             <li className="font-semibold hover:bg-fuchsia-200 hover:bg-opacity-30 hover:text-stone-100 rounded tracking-wide pl-1 py-3 mt-2">
-              <Link to="/dashboard/profile-project">
+              <Link to="/dashboard">
                 {" "}
                 <RiProjectorLine className="inline-block -mt-1 mr-2 w-5 h-5" />
                 My projects

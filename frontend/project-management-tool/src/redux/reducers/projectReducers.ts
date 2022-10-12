@@ -11,6 +11,7 @@ import { ProjectActionTypes } from "../constants/actionTypes";
 const initialState = {
   loading: true,
   error: null,
+  upload: [],
   projects: [],
   userProjects: [],
   aProject: [],
@@ -28,7 +29,7 @@ export const projectsReducers = (
         ...state,
         loading: false,
         error: null,
-        signup: payload,
+        upload: payload,
       };
     case ProjectActionTypes.USER_PROJECTS:
       return {

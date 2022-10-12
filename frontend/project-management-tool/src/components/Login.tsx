@@ -21,7 +21,6 @@ const Login: React.FC<{}> = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const [status, setStatus] = useState<string>("idle");
-  
 
   // form validation
   const reviewSchema = yup.object({
@@ -52,7 +51,7 @@ const Login: React.FC<{}> = () => {
         setStatus("success");
         toast.success("Successfully logged in!");
         setTimeout(() => {
-          navigate("/dashboard/profile-project");
+          navigate("/dashboard");
         }, 2000);
       }, 2000);
     } else {
@@ -99,14 +98,14 @@ const Login: React.FC<{}> = () => {
 
           <Toaster position="top-right" />
           <div className="px-12 mt-20">
-            <h2 className="font-semibold text-3xl text-gray-700">
-              Welcome back
+            <h2 className="font-semibold text-2xl text-gray-700">
+              Login to Your Account
             </h2>
             <Formik
               initialValues={initialValues}
               validationSchema={reviewSchema}
               onSubmit={(values, actions) => {
-                actions.resetForm();
+                // actions.resetForm();
                 handleSubmit(values);
               }}
             >
@@ -118,7 +117,7 @@ const Login: React.FC<{}> = () => {
                       name="email"
                       autoComplete="off"
                       placeholder="Email"
-                      className=" border-b border-gray-200 outline-none w-full py-3 px-2 mb-2 mt-5"
+                      className=" border-b border-zinc-400 outline-none w-full py-3 px-2 mb-2 mt-5"
                     />
 
                     <ErrorMessage
@@ -133,7 +132,7 @@ const Login: React.FC<{}> = () => {
                       name="password"
                       autoComplete="off"
                       placeholder="Password"
-                      className="border-b border-gray-200 outline-none w-full py-3 px-2 my-2"
+                      className="border-b border-zinc-400 outline-none w-full py-3 px-2 my-2"
                     />
 
                     <ErrorMessage
@@ -145,7 +144,7 @@ const Login: React.FC<{}> = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`text-center bg-fuchsia-900 text-white w-full rounded mt-7 mb-8 py-3 px-7  ${
+                    className={`text-center bg-fuchsia-900 text-white w-full rounded mt-10 mb-8 py-3 px-7  ${
                       status === "loading" && "bg-opacity-70"
                     }`}
                   >

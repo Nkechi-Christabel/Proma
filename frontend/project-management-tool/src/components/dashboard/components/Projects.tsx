@@ -36,16 +36,16 @@ const Projects: React.FC = () => {
         className="cursor-pointer h-full"
         key={pro._id}
       >
-        <div className="">
-          <div className="rounded overflow-hidden drop-shadow-lg shadow-md">
+        <div>
+          <div className="rounded overflow-hidden drop-shadow-lg shadow-md h-80">
             <img
-              className="w-full xl:h-48 object-cover"
+              className="w-full sm:h-52 object-cover"
               src={pro.image}
               alt="project"
             />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2">{pro.title}</div>
-              <p className="text-gray-700 text-base">{pro.desc}</p>
+              <p className="text-gray-700 text-base line-clamp-2">{pro.desc}</p>
             </div>
           </div>
         </div>

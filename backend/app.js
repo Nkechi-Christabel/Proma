@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-
+const PORT = process.env.PORT || 8000;
 // const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const logger = require("morgan");
@@ -68,8 +68,6 @@ app.use("/", mainRoutes);
 app.use("/projects", projectRoutes);
 
 //Server Running
-app.listen(process.env.PORT, () => {
-  console.log(
-    `Server is running on port ${process.env.PORT}, you better catch it!`
-  );
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}, you better catch it!`);
 });
