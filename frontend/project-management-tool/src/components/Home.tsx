@@ -11,10 +11,10 @@ const Home: React.FC = () => {
   // const { login } = useSelector((state: InitialState) => state.userInfo);
 
   return (
-    <div className="px-6">
+    <div className="px-4 h-full">
       <header>
-        <div className="flex justify-between container mx-auto max-w-7xl pt-9  relative">
-          <div>
+        <div className="flex justify-between container mx-auto max-w-6xl pt-9  relative">
+          <div className="xl:-ml-12">
             <Link to="/">
               <img src={Logo} alt="logo" className="w-12 inline-block" />
               <span className="inline-block align-middle font-bold text-stone-700 text-xl mt-1">
@@ -72,15 +72,15 @@ const Home: React.FC = () => {
           </ul>
         </nav>
       </header>
-      <main className="container mx-auto max-w-7xl px-3">
-        <section className="md:flex justify-between  hero__section mt-20">
-          <div className="self-center md:max-w-2xl text-center md:text-start pb-4 md:pb-0 ">
+      <main className="container mx-auto max-w-7xl px-3 h-full">
+        <section className="md:flex justify-between items-center hero__section mt-20 md:mt-40 h-96">
+          <div className="self-center md:max-w-2xl text-center md:text-start pb-4 md:pb-0 md:pr-4">
             <h1 className="font-bold lg:text-6xl text-5xl mb-3 leading-tight text-gray-700">
-              Create a new space for your project
+              Create a new space for your projects
             </h1>
             <p className="text-md md:text-xl text-gray-500 ">
-              Now you have all your projects in a place, to be accessed anytime
-              and anywhere.
+              Now you can store, share your projects and access them anytime,
+              anywhere and on the go.
             </p>
             <Link to="/signup">
               <button className="btn my-7 px-6 py-3 text-xl text-white bg-rose-500 hover:bg-fuchsia-700 rounded">
@@ -89,11 +89,11 @@ const Home: React.FC = () => {
             </Link>
           </div>
           <Tilt>
-            <div className="md:ml-8 md:block flex justify-center">
+            <div className="md:ml-12 md:block flex justify-center pb-8">
               <img
                 src={Illustration}
                 alt="3D illustration"
-                className="illustration rounded-full border-2 border-red-200 max-w-xl w-full"
+                className="illustration rounded-full border-2 border-red-200  w-full h-auto"
               />
             </div>
           </Tilt>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 // import { useFormik } from "formik";
 import { Formik } from "formik";
 import { BsCloudUpload } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-import { projectUpload } from "../../../redux/actions/projectActions";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateProject } from "../../../redux/actions/projectActions";
 import { useDispatch } from "react-redux";
 import { serialize } from "object-to-formdata";
 import * as yup from "yup";
@@ -37,37 +37,9 @@ const UpdateProject: React.FC<{}> = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const [picture, setPicture] = useState<any>("");
+  const { id } = useParams();
 
   const { aProject } = useSelector((state: InitialState) => state.projects);
-  //Setting in the state the values of the project that needs to be updated
-  const [values, setValues] = useState({
-    title: aProject?.title,
-    image: "",
-    website: aProject?.website,
-    gitRepo: aProject?.gitRepo,
-    desc: aProject?.desc,
-    status: {
-      isInitiating: aProject?.status.isInitiating,
-      isExecuting: aProject?.status.isExecuting,
-      isComplete: aProject?.status.isComplete,
-      isHosted: aProject?.status.isHosted,
-    },
-  });
-
-  //Clear the initials values of the fixed values
-  const resetValues = {
-    title: "",
-    image: "",
-    website: "",
-    gitRepo: "",
-    desc: "",
-    status: {
-      isInitiating: false,
-      isExecuting: false,
-      isComplete: false,
-      isHosted: false,
-    },
-  };
 
   const removeImage = () => setPicture("");
 
@@ -75,7 +47,7 @@ const UpdateProject: React.FC<{}> = () => {
     title: yup
       .string()
       .min(2, "Too Short!")
-      .max(20, "Too Long!")
+      .max(30, "Too Long!")
       .required("A project name is required"),
     image: yup
       .mixed()
@@ -122,7 +94,17 @@ const UpdateProject: React.FC<{}> = () => {
   });
 
   const initialValues: FormValuesProject = {
-    ...values,
+    title: aProject?.title,
+    image: "",
+    website: aProject?.website,
+    gitRepo: aProject?.gitRepo,
+    desc: aProject?.desc,
+    status: {
+      isInitiating: aProject?.status.isInitiating,
+      isExecuting: aProject?.status.isExecuting,
+      isComplete: aProject?.status.isComplete,
+      isHosted: aProject?.status.isHosted,
+    },
   };
 
   //This is invoked when the form is submitted
@@ -132,16 +114,16 @@ const UpdateProject: React.FC<{}> = () => {
     const formData = serialize(values);
 
     // Get a response from the api call
-    const res = await dispatch(projectUpload(formData));
+    const res = await dispatch(updateProject(id, formData));
 
     // Display a message according to the response status
-    if (res.status === 201) {
+    if (res.status === 200) {
       setTimeout(() => {
         setStatus("success");
         toast.success("User successfully updated!");
 
         setTimeout(() => {
-          navigate("/dashboard/profile-project");
+          navigate("/dashboard");
         }, 2000);
       }, 2000);
     } else {
@@ -176,8 +158,7 @@ const UpdateProject: React.FC<{}> = () => {
         initialValues={initialValues}
         validationSchema={reviewSchema}
         onSubmit={(values, actions) => {
-          actions.resetForm();
-          setValues(resetValues);
+          //   actions.resetForm();
           handleSubmit(values);
         }}
       >

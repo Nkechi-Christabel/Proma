@@ -24,7 +24,7 @@ const Header: React.FC<Props> = ({ setChecked }) => {
   return (
     <section>
       {" "}
-      <header className="py-5 px-10 lg:pr-6 lg:pl-3 bg-white shadow-pink-100 shadow-lg flex justify-between fixed top-0 right-0 left-0 z-10">
+      <header className="py-5 px-7 md:pr-7 md:pl-3 bg-white shadow-pink-100 shadow-lg flex justify-between fixed top-0 right-0 left-0 z-10">
         <label
           htmlFor="hamburger"
           className="hamburger-menu md:hidden block text-3xl cursor-pointer"

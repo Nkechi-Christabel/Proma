@@ -29,11 +29,6 @@ module.exports.createProject = async (req, res) => {
   }
 };
 
-// Project.find()
-//   .populate("user")
-//   .then((project) => console.log("this is the result", project))
-//   .catch((error) => console.log(error));
-
 //get user's posted project/projects
 module.exports.userProjects = async (req, res) => {
   try {
@@ -102,33 +97,31 @@ module.exports.updateProject = async (req, res) => {
       _id: req.params.id,
       user: req.user._id,
     });
+    if (!project) {
+      res.status(404).json({ message: "Project not found" });
+    }
 
+    //
     //Delete the prev image
     await cloudinary.uploader.destroy(project.cloudinaryId);
     //Upload the new one
     const upload = await cloudinary.uploader.upload(req.file.path);
 
-    const data = await Project.create({
-      title: req.body.title,
+    const { body } = req;
+    const data = {
+      ...body,
       image: upload.secure_url,
       cloudinaryId: upload.public_id,
-      website: req.body.website,
-      desc: req.body.desc,
-      gitRepo: req.body.gitRepo,
-      status: {
-        isInitiating: req.body.status.isInitiating,
-        isExecuting: req.body.status.isExecuting,
-        isComplete: req.body.status.isComplete,
-        isHosted: req.body.status.isHosted,
-      },
-      user: req.user._id,
-    });
+    };
 
-    project = await Project.findOneAndUpdate({ _id: req.params.id }, data, {
-      new: true,
-    });
+    project = await Project.findOneAndUpdate(
+      { _id: req.params.id, user: req.user._id },
+      data,
+      {
+        new: true,
+      }
+    );
 
-    console.log(data);
     res.status(200).json(project);
   } catch (err) {
     res.status(500).json({

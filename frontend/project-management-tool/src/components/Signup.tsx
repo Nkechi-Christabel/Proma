@@ -114,7 +114,7 @@ const Signup: React.FC<{}> = () => {
               initialValues={initialValues}
               validationSchema={reviewSchema}
               onSubmit={(values, actions) => {
-                actions.resetForm();
+                // actions.resetForm();
                 handleSubmit(values);
               }}
             >
@@ -126,7 +126,7 @@ const Signup: React.FC<{}> = () => {
                       name="name"
                       autoComplete="off"
                       placeholder="Name"
-                      className="border-b border-gray-200 outline-none w-full py-3 px-2 mb-2 mt-5"
+                      className="border-b border-zinc-400 outline-none w-full py-3 px-2 mb-2 mt-5"
                     />
 
                     <ErrorMessage
@@ -141,7 +141,7 @@ const Signup: React.FC<{}> = () => {
                       name="email"
                       autoComplete="off"
                       placeholder="Email"
-                      className=" border-b border-gray-200 outline-none w-full py-3 px-2 my-2"
+                      className=" border-b border-zinc-400 outline-none w-full py-3 px-2 my-2"
                     />
 
                     <ErrorMessage
@@ -156,7 +156,7 @@ const Signup: React.FC<{}> = () => {
                       name="password"
                       autoComplete="off"
                       placeholder="Password"
-                      className="border-b border-gray-200 outline-none w-full py-3 px-2 my-2"
+                      className="border-b border-zinc-400 outline-none w-full py-3 px-2 my-2"
                     />
 
                     <ErrorMessage
@@ -168,7 +168,7 @@ const Signup: React.FC<{}> = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`text-center bg-fuchsia-900 text-white w-full rounded mt-7 mb-8 py-3 px-7  ${
+                    className={`text-center bg-fuchsia-900 text-white w-full rounded mt-10 mb-8 py-3 px-7  ${
                       status === "loading" && "bg-opacity-70"
                     }`}
                   >

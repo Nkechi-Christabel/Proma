@@ -42,7 +42,7 @@ const CreateProject: React.FC<{}> = () => {
     title: yup
       .string()
       .min(2, "Too Short!")
-      .max(20, "Too Long!")
+      .max(30, "Too Long!")
       .required("A project name is required"),
     image: yup
       .mixed()
@@ -118,7 +118,7 @@ const CreateProject: React.FC<{}> = () => {
         toast.success("Project successfully created!");
 
         setTimeout(() => {
-          navigate("/dashboard/profile-project");
+          navigate("/dashboard");
         }, 2000);
       }, 2000);
     } else {
@@ -153,7 +153,7 @@ const CreateProject: React.FC<{}> = () => {
         initialValues={initialValues}
         validationSchema={reviewSchema}
         onSubmit={(values, actions) => {
-          actions.resetForm();
+          // actions.resetForm();
           handleSubmit(values);
         }}
       >

@@ -46,7 +46,7 @@ const ProjectDetails = () => {
         setDeleteLoading(false);
         toast.success("Project deleted!");
         setTimeout(() => {
-          navigate("/dashboard/profile-project");
+          navigate("/dashboard");
         }, 3000);
       }, 2000);
     } else {
@@ -92,7 +92,7 @@ const ProjectDetails = () => {
         <section className="project__details h-full px-10 pt-28 pb-5 text-gray-800">
           <Toaster position="top-right" />
 
-          <section className="userInfo__section sm:grid grid-cols-2 justify-between pb-6">
+          <section className="userInfo__section sm:grid grid-cols-2 justify-between pb-4">
             <div className="self-center hidden sm:block">
               <ProgressBar />
             </div>
@@ -108,7 +108,7 @@ const ProjectDetails = () => {
 
           <section className="ml-20">
             <div
-              className={`deleteText__section fixed top-20 md:left-60 left-8 right-12 translate-y-8 translate-x-2 z-10 p-9 flex justify-center py-3 bg-pink-100 ${
+              className={`deleteText__section fixed top-20 md:left-60 left-8 right-12 translate-y-8 translate-x-2 z-10 p-9 flex justify-center py-3 bg-pink-100 transition-transform ${
                 cancel && "hidden"
               } ${del ? "block" : "hidden"}`}
             >
@@ -139,12 +139,12 @@ const ProjectDetails = () => {
             <h3 className="text-center uppercase font-bold text-2xl pb-2">
               {aProject?.title}
             </h3>
-            <div className="lg:flex justify-center items-center decoration-pink-700 drop-shadow-xl shadow-md shadow-pink-100 py-10 lg:py-20 px-5 w-full">
+            <div className="project__display lg:grid grid-cols-2 gap-8 justify-center items-center drop-shadow-xl shadow-lg shadow-pink-100 py-10 lg:py-16 px-5 w-full overflow-y-scroll">
               <div>
                 <img
                   src={aProject?.image}
                   alt="project representation"
-                  className="lg:w-9/12 w-full h-auto"
+                  className="w-full h-auto"
                 />
               </div>
               <div className="pt-9">
@@ -154,11 +154,21 @@ const ProjectDetails = () => {
                 </p>
                 <p className="py-2">
                   <span className="font-semibold text-lg">Website: </span>
-                  {aProject?.website}
+                  <a
+                    href={aProject?.website}
+                    className="text-violet-500 hover:text-pink-400"
+                  >
+                    {aProject?.website}
+                  </a>
                 </p>
                 <p className="py-2">
                   <span className="font-semibold text-lg">Git Repo: </span>
-                  {aProject?.gitRepo}
+                  <a
+                    href={aProject?.gitRepo}
+                    className="text-violet-500 hover:text-pink-400"
+                  >
+                    {aProject?.gitRepo}
+                  </a>
                 </p>
                 <div className="delete__edit flex justify-end lg:justify-center mt-9 lg:mt-24">
                   <Link

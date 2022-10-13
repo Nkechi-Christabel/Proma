@@ -25,10 +25,10 @@ const ProgressBar = () => {
     );
 
     setStatus((prev) =>
-      complete
-        ? (prev = "Completed")
-        : hosted
+      hosted
         ? (prev = "Hosted")
+        : complete
+        ? (prev = "Completed")
         : executing
         ? (prev = "Executing")
         : prev
