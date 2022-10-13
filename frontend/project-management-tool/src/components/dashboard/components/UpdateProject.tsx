@@ -39,7 +39,6 @@ const UpdateProject: React.FC<{}> = () => {
   const [picture, setPicture] = useState<any>("");
   const { id } = useParams();
 
-
   const { aProject } = useSelector((state: InitialState) => state.projects);
 
   const removeImage = () => setPicture("");
@@ -48,7 +47,7 @@ const UpdateProject: React.FC<{}> = () => {
     title: yup
       .string()
       .min(2, "Too Short!")
-      .max(20, "Too Long!")
+      .max(30, "Too Long!")
       .required("A project name is required"),
     image: yup
       .mixed()
@@ -114,7 +113,6 @@ const UpdateProject: React.FC<{}> = () => {
 
     const formData = serialize(values);
 
-  
     // Get a response from the api call
     const res = await dispatch(updateProject(id, formData));
 

@@ -42,7 +42,7 @@ const CreateProject: React.FC<{}> = () => {
     title: yup
       .string()
       .min(2, "Too Short!")
-      .max(20, "Too Long!")
+      .max(30, "Too Long!")
       .required("A project name is required"),
     image: yup
       .mixed()
