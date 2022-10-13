@@ -29,6 +29,11 @@ module.exports.createProject = async (req, res) => {
   }
 };
 
+// Project.find()
+//   .populate("user")
+//   .then((project) => console.log("this is the result", project))
+//   .catch((error) => console.log(error));
+
 //get user's posted project/projects
 module.exports.userProjects = async (req, res) => {
   try {
