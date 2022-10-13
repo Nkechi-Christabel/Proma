@@ -1,6 +1,5 @@
 const cloudinary = require("../middleware/cloudinary");
 const Project = require("../models/Project");
-// const ObjectId = require("mongodb").ObjectId;
 
 //Create a new project
 module.exports.createProject = async (req, res) => {
