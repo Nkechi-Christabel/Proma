@@ -37,7 +37,7 @@ const Projects: React.FC = () => {
         key={pro._id}
       >
         <div>
-          <div className="rounded overflow-hidden drop-shadow-lg shadow-md h-80">
+          <div className="rounded overflow-hidden drop-shadow-lg shadow-md sm:h-80">
             <img
               className="w-full sm:h-52 object-cover"
               src={pro.image}
