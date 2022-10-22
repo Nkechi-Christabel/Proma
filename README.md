@@ -11,7 +11,6 @@ This app is particularly useful for developers without a portfolio, as they can 
 
 **Server:** Node.js, MongoDB, Mongoose, Express, Passport Auth, Cloudinary.
 
-
 ## Lessons Learned
 This project was lessons packed. I learnt so much while building this app, a few of which are listed below.
 
