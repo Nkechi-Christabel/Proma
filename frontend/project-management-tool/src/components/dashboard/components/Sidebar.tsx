@@ -20,7 +20,7 @@ const Sidebar: React.FC<Props> = ({ checked }) => {
 
   return (
     <section
-      className={`sidebar bg-black bg-opacity-40 md:bg-gradient-to-br from-fuchsia-500 to-fuchsia-900 hidden md:block w-full h-full fixed left-0 bottom-0 top-16 mt-1 z-20 overflow-hidden ${
+      className={`sidebar bg-black bg-opacity-40 md:bg-gradient-to-br from-fuchsia-500 to-fuchsia-900 hidden md:block w-full h-full fixed left-0 bottom-0 top-16 mt-1 z-20 ${
         checked ? "d-block" : "hide"
       }
       }`}

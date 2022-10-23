@@ -89,7 +89,7 @@ const ProjectDetails = () => {
         </div>
       )}
       {!error && (
-        <section className="project__details h-full px-10 pt-28 pb-5 text-gray-800">
+        <section className="project__details h-full md:px-10 px-6 pt-28 pb-5 text-gray-800">
           <Toaster position="top-right" />
 
           <section className="userInfo__section sm:grid grid-cols-2 justify-between pb-4">
@@ -97,8 +97,8 @@ const ProjectDetails = () => {
               <ProgressBar />
             </div>
             <div className="font-semibold text-lg grid justify-end">
-              <p className="pb-3">{aProject?.user.name}</p>
-              <p className="pb-3">{aProject?.user.email}</p>
+              <p className="pb-3">{aProject?.user?.name}</p>
+              <p className="pb-3">{aProject?.user?.email}</p>
               <p className="pb-3">Created: {newDate}</p>
             </div>
             <div className="block sm:hidden w-7/12 pt-6">
@@ -136,7 +136,7 @@ const ProjectDetails = () => {
             </div>
           </section>
           <section className="projectDetails__content h-full pt-0">
-            <h3 className="text-center uppercase font-bold text-2xl pb-2">
+            <h3 className="text-center uppercase font-bold text-2xl py-2">
               {aProject?.title}
             </h3>
             <div className="project__display lg:grid grid-cols-2 gap-8 justify-center items-center drop-shadow-xl shadow-lg shadow-pink-100 py-10 lg:py-16 px-5 w-full overflow-y-scroll">

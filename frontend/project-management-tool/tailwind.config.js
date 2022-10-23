@@ -22,7 +22,7 @@ module.exports = {
         // => @media (min-width: 1536px) { ... }
       },
       gridTemplateColumns: {
-        "auto-fit": "repeat(auto-fit, minmax(0, 1fr))",
+        "auto-fit": "repeat(auto-fit, minmax(15rem, 1fr))",
         "auto-fill": "repeat(auto-fill, minmax(0, 1fr))",
       },
       gridTemplateRows: {

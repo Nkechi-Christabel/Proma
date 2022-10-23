@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <div className="min-h-screen h-max bg-white dashboard">
+    <div className="h-full bg-white dashboard">
       <Header setChecked={setChecked} />
       <Sidebar checked={checked} />
       <Outlet />

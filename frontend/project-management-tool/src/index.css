@@ -57,11 +57,8 @@
 }
 
 /* Project Cards */
-
 .flip-card {
   background-color: transparent;
-  /* width: 250px;
-  height: 250px; */
   perspective: 1000px;
 }
 
@@ -72,7 +69,6 @@
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .flip-card:hover .flip-card-inner {
@@ -88,21 +84,66 @@
   backface-visibility: hidden;
 }
 
-/* .flip-card-front {
-  background-color: #bbb;
-  color: black;
-} */
-
 .flip-card-back {
-  /* background-color: #2980b9;
-  color: white; */
   transform: rotateY(180deg);
 }
 
 .back {
-  /* background: #03446a;
-  color: white; */
   transform: rotateY(180deg);
+}
+
+/* PAGINATION */
+.pagination {
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #e0e0e0;
+  pointer-events: auto;
+}
+.pagination li:not(:first-child) {
+  border-left: 0;
+}
+
+.pagination li:hover {
+  background: #ededed;
+}
+
+.pagination li:hover a {
+  color: #eb4ff0;
+}
+
+.pagination li.active {
+  background: #8076a3;
+}
+
+.pagination li a {
+  text-decoration: none;
+  color: #810794;
+  font-size: 20px;
+}
+
+.pagination li.active a {
+  color: white;
+}
+
+.pagination li:first-child {
+  border-radius: 0.3rem 0 0 0.3rem;
+}
+
+.pagination li:last-child {
+  border-radius: 0 0.3rem 0.3rem 0;
+}
+
+li.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 @media screen and (min-width: 768px) {

@@ -34,9 +34,11 @@ const CreateProject: React.FC<{}> = () => {
   ];
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
-  const [picture, setPicture] = useState<any>("");
+  const [picture, setPicture] = useState<File | null | Blob | MediaSource>(
+    null
+  );
 
-  const removeImage = () => setPicture("");
+  const removeImage = () => setPicture(null);
 
   const reviewSchema = yup.object({
     title: yup
@@ -130,7 +132,7 @@ const CreateProject: React.FC<{}> = () => {
         );
       }, 2000);
     }
-    setPicture("");
+    setPicture(null);
   };
 
   //Changes the text in the register button depending on the status
@@ -193,7 +195,7 @@ const CreateProject: React.FC<{}> = () => {
                       );
                     }}
                   />
-                  {picture !== "" && (
+                  {picture && (
                     <div className="flex flex-col phone:w-44 mb-4 drop-shadow">
                       <img
                         className="w-full h-44 object-cover"

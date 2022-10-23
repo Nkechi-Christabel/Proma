@@ -6,10 +6,10 @@ const ProgressBar = () => {
   const [progress, setProgress] = useState(0);
   const { aProject } = useSelector((state: InitialState) => state.projects);
   const [status, setStatus] = useState("Initiating");
-  const initiating = aProject?.status.isInitiating;
-  const executing = aProject?.status.isExecuting;
-  const complete = aProject?.status.isComplete;
-  const hosted = aProject?.status.isHosted;
+  const initiating = aProject?.status?.isInitiating;
+  const executing = aProject?.status?.isExecuting;
+  const complete = aProject?.status?.isComplete;
+  const hosted = aProject?.status?.isHosted;
 
   useEffect(() => {
     setProgress((prev) =>

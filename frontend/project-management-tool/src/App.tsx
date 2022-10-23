@@ -26,7 +26,7 @@ const App: React.FC = () => {
   const { loggedIn } = useSelector((state: InitialState) => state.userInfo);
 
   return (
-    <div className="App">
+    <div className="App bg-gradient-to-r from-red-50 via-red-100 to-fuchsia-200 h-screen">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -35,7 +35,7 @@ const App: React.FC = () => {
           <Route
             path="/dashboard"
             element={
-              loggedIn.token ? <Dashboard /> : <Navigate replace to="/login" />
+              loggedIn?.token ? <Dashboard /> : <Navigate replace to="/login" />
             }
           >
             <Route path="create-project" element={<CreateProject />} />

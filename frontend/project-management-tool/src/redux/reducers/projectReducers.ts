@@ -1,14 +1,17 @@
 import { ProjectActionTypes } from "../constants/actionTypes";
 
-// interface State {
-//   loading: boolean;
-//   error: any;
-//   project: any[];
-//   userProjects: any[];
-//   aProject: any[];
-// }
+interface State {
+  loading: boolean;
+  error: any;
+  upload: string[];
+  projects: string[];
+  userProjects: string[];
+  aProject: string[];
+  delProject: string[];
+  editProject: string[];
+}
 
-const initialState = {
+const initialState: State = {
   loading: true,
   error: null,
   upload: [],
