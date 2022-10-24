@@ -44,21 +44,21 @@ const Projects: React.FC = () => {
         className="cursor-pointer"
         key={pro._id}
       >
-        <div>
-          <div className="rounded overflow-hidden drop-shadow-lg shadow-md hover:shadow-gray-300 hover:shadow-xl transition-shadow sm:h-80">
-            <img
-              className="w-full sm:h-52 object-cover"
-              src={pro.image}
-              alt="project"
-            />
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">
-                {handleTitleCase(pro.title)}
-              </div>
-              <p className="text-gray-700 text-base line-clamp-2">{pro.desc}</p>
+        {/* <div> */}
+        <div className="rounded overflow-hidden drop-shadow-lg shadow-md hover:shadow-gray-300 hover:shadow-xl transition-shadow sm:h-80 sm:max-w-sm">
+          <img
+            className="w-full sm:h-52 object-cover"
+            src={pro.image}
+            alt="project"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">
+              {handleTitleCase(pro.title)}
             </div>
+            <p className="text-gray-700 text-base line-clamp-2">{pro.desc}</p>
           </div>
         </div>
+        {/* </div> */}
       </Link>
     );
   });
@@ -83,7 +83,7 @@ const Projects: React.FC = () => {
         </div>
       )}
       {!error && (
-        <section className="h-full grid gap-y-10 profile__project">
+        <section className="h-full grid gap-y-8 profile__project">
           <section className="pt-28 pr-6">
             <div className="flex justify-end">
               <input

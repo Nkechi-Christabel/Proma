@@ -40,7 +40,7 @@ const ProfileProject: React.FC = () => {
         className="cursor-pointer"
         key={pro._id}
       >
-        <div className="flip-card w-full h-96 py-4 lg:h-80">
+        <div className="flip-card w-full h-96 py-4 lg:h-80 sm:max-w-sm">
           <div className="flip-card-inner shadow-lg shadow-pink-300 ">
             <div className="flip-card-front">
               <img
@@ -84,7 +84,7 @@ const ProfileProject: React.FC = () => {
         </div>
       )}
       {!error && (
-        <section className="h-full grid gap-y-10 profile__project">
+        <section className="h-full grid gap-y-8 profile__project">
           <section className="pt-28 p-3 pr-6">
             <div className="flex justify-end">
               <input
