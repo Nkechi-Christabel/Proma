@@ -115,13 +115,16 @@ const Projects: React.FC = () => {
                 <h1 className="font-bold text-xl text-stone-800 text-center tracking-wide pb-6">
                   All Projects
                 </h1>
-                <div className="grid grid-cols-auto-fit gap-10">
+                <div className="grid grid-cols-auto-fit items-start gap-10">
                   {handleProjects}
                 </div>
               </div>
             )}
           </section>
-          <Pagination project={projects} setCurrentItems={setCurrentItems} />
+          <div>
+            {" "}
+            <Pagination project={projects} setCurrentItems={setCurrentItems} />
+          </div>
         </section>
       )}
     </div>

@@ -121,20 +121,23 @@ const ProfileProject: React.FC = () => {
               </div>
             )}
             {userProjects?.length > 0 && (
-              <div className="h-full p-5 pt-0">
+              <div className="h-full p-5">
                 <h2 className="font-bold text-xl text-center text-stone-800 tracking-wide pb-4">
                   Individual projects
                 </h2>
-                <div className="grid grid-cols-auto-fit gap-8">
+                <div className="grid grid-cols-auto-fit gap-10">
                   {handleUserProjects}
                 </div>
               </div>
             )}
           </section>
-          <Pagination
-            project={userProjects}
-            setCurrentItems={setCurrentItems}
-          />
+          <div>
+            {" "}
+            <Pagination
+              project={userProjects}
+              setCurrentItems={setCurrentItems}
+            />
+          </div>
         </section>
       )}
     </div>

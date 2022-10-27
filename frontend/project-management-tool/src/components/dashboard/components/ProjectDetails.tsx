@@ -46,7 +46,7 @@ const ProjectDetails = () => {
         setDeleteLoading(false);
         toast.success("Project deleted!");
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate(-1);
         }, 3000);
       }, 2000);
     } else {
