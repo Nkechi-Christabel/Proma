@@ -16,7 +16,7 @@ const Pagination: React.FC<Props> = ({ project, setCurrentItems }) => {
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(project?.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(project?.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, project, setCurrentItems]);
@@ -24,9 +24,9 @@ const Pagination: React.FC<Props> = ({ project, setCurrentItems }) => {
   // Invoke when user click to request another page.
   const handlePageClick = (e: { selected: number }) => {
     const newOffset = (e.selected * itemsPerPage) % project?.length;
-    console.log(
-      `User requested page number ${e.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${e.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
 
