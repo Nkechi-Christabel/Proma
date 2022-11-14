@@ -4,8 +4,8 @@ interface State {
   loading: boolean;
   error: any;
   upload: string[];
-  projects: string[];
-  userProjects: string[];
+  projects: {}[];
+  userProjects: {}[];
   aProject: string[];
   delProject: string[];
   editProject: string[];
