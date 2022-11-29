@@ -45,9 +45,9 @@ const Projects: React.FC = () => {
         key={pro._id}
       >
         {/* <div> */}
-        <div className="rounded overflow-hidden drop-shadow-lg shadow-md hover:shadow-gray-300 hover:shadow-xl transition-shadow sm:h-80 sm:max-w-sm">
+        <div className="rounded overflow-hidden drop-shadow-lg shadow-md hover:shadow-gray-300 hover:shadow-xl transition-shadow h-96 ">
           <img
-            className="w-full sm:h-52 object-cover"
+            className="w-full h-64 object-cover"
             src={pro.image}
             alt="project"
           />
@@ -115,7 +115,7 @@ const Projects: React.FC = () => {
                 <h1 className="font-bold text-xl text-stone-800 text-center tracking-wide pb-6">
                   All Projects
                 </h1>
-                <div className="grid grid-cols-auto-fit items-start gap-10">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-auto-fit items-start gap-10">
                   {handleProjects}
                 </div>
               </div>

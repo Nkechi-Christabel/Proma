@@ -40,7 +40,7 @@ const ProfileProject: React.FC = () => {
         className="cursor-pointer"
         key={pro._id}
       >
-        <div className="flip-card w-full h-96 py-4 lg:h-80 sm:max-w-sm">
+        <div className="flip-card w-full h-96 py-4 lg:h-80">
           <div className="flip-card-inner shadow-lg shadow-pink-300 ">
             <div className="flip-card-front">
               <img
@@ -125,7 +125,7 @@ const ProfileProject: React.FC = () => {
                 <h2 className="font-bold text-xl text-center text-stone-800 tracking-wide pb-4">
                   Individual projects
                 </h2>
-                <div className="grid grid-cols-auto-fit gap-10">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-auto-fit gap-10">
                   {handleUserProjects}
                 </div>
               </div>
