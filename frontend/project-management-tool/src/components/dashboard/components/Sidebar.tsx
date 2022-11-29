@@ -36,7 +36,7 @@ const Sidebar: React.FC<Props> = ({ checked }) => {
         </div>
         <nav className="navbar text-stone-200 ">
           <ul className="px-3">
-            <li className="font-semibold hover:bg-fuchsia-200 hover:bg-opacity-30 hover:text-stone-100 rounded tracking-wide pl-1 py-3 mt-2">
+            <li className="font-semibold hover:bg-fuchsia-200 hover:bg-opacity-30 hover:text-stone-100 active:bg-fuchsia-200 active:bg-opacity-30 active:text-stone-100 rounded tracking-wide pl-1 py-3 mt-2">
               <Link to="/dashboard">
                 {" "}
                 <RiProjectorLine className="inline-block -mt-1 mr-2 w-5 h-5" />
