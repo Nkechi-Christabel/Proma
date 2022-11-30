@@ -1,2 +1,2 @@
 [build]
-  base = "frontend/project-management-tool"
+  base = "frontend"
