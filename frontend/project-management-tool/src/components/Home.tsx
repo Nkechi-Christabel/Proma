@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
 import Logo from "../assets/logo.png";
 import Illustration from "../assets/illustration.png";
-// import { InitialState } from "../redux/store";
-// import { useSelector } from "react-redux";
-
 const Home: React.FC = () => {
   const [checked, setChecked] = useState<boolean>(false);
   // const { login } = useSelector((state: InitialState) => state.userInfo);
