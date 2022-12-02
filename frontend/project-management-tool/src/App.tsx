@@ -9,7 +9,6 @@ import {
 import "./index.css";
 import { InitialState } from "./redux/store";
 import { useSelector } from "react-redux";
-// import { getUser } from "./redux/actions/userActions";
 
 import CreateProject from "./components/dashboard/components/CreateProject";
 import Dashboard from "./components/dashboard/components/Dashboard";
@@ -22,7 +21,6 @@ import UpdateProject from "./components/dashboard/components/UpdateProject";
 import Projects from "./components/dashboard/components/Projects";
 
 const App: React.FC = () => {
-  // const dispatch = useDispatch<any>();
   const { loggedIn } = useSelector((state: InitialState) => state.userInfo);
 
   return (
