@@ -8,8 +8,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Tilt from "react-parallax-tilt";
 import Logo from "../assets/logo.png";
-// import { InitialState } from "../redux/store";
-// import { useSelector } from "react-redux";
 import { login } from "../redux/actions/userActions";
 
 export interface FormValuesLogin {
