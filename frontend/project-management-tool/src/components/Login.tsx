@@ -17,7 +17,7 @@ export interface FormValuesLogin {
   password: string;
 }
 
-const Login: React.FC<{}> = () => {
+const Login: React.FC<FormValuesLogin> = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const [status, setStatus] = useState<string>("idle");
