@@ -23,7 +23,6 @@ const Signup: React.FC<{}> = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const [status, setStatus] = useState<string>("idle");
-  // const error = useSelector((state: InitialState) => state.userInfo.error);
 
   // form validation
   const reviewSchema = yup.object({
