@@ -37,31 +37,33 @@ const Projects: React.FC = () => {
   const handleTitleCase = (title: string) =>
     title[0].toUpperCase() + title?.slice(1);
 
-  const handleProjects = filteredProjects?.map((pro: any) => {
-    return (
-      <Link
-        to={`/dashboard/project-details/${pro._id}`}
-        className="cursor-pointer"
-        key={pro._id}
-      >
-        {/* <div> */}
-        <div className="rounded overflow-hidden drop-shadow-lg shadow-md hover:shadow-gray-300 hover:shadow-xl transition-shadow h-96 ">
-          <img
-            className="w-full h-64 object-cover"
-            src={pro.image}
-            alt="project"
-          />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">
-              {handleTitleCase(pro.title)}
+  const handleProjects =
+    Array.isArray(filteredProjects) &&
+    filteredProjects?.map((pro: any) => {
+      return (
+        <Link
+          to={`/dashboard/project-details/${pro._id}`}
+          className="cursor-pointer"
+          key={pro._id}
+        >
+          {/* <div> */}
+          <div className="rounded overflow-hidden drop-shadow-lg shadow-md hover:shadow-gray-300 hover:shadow-xl transition-shadow h-96 ">
+            <img
+              className="w-full h-64 object-cover"
+              src={pro.image}
+              alt="project"
+            />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2">
+                {handleTitleCase(pro.title)}
+              </div>
+              <p className="text-gray-700 text-base line-clamp-2">{pro.desc}</p>
             </div>
-            <p className="text-gray-700 text-base line-clamp-2">{pro.desc}</p>
           </div>
-        </div>
-        {/* </div> */}
-      </Link>
-    );
-  });
+          {/* </div> */}
+        </Link>
+      );
+    });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | undefined) => {
     setValue((e?.target as HTMLInputElement).value);

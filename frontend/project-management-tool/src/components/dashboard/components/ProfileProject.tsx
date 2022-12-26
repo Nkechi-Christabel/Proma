@@ -33,36 +33,38 @@ const ProfileProject: React.FC = () => {
   const handleTitleCase = (title: string) =>
     title[0].toUpperCase() + title.slice(1);
 
-  const handleUserProjects = projects?.map((pro: any) => {
-    return (
-      <Link
-        to={`/dashboard/project-details/${pro._id}`}
-        className="cursor-pointer"
-        key={pro._id}
-      >
-        <div className="flip-card w-full h-96 py-4 lg:h-80">
-          <div className="flip-card-inner shadow-lg shadow-pink-300 ">
-            <div className="flip-card-front">
-              <img
-                src={pro.image}
-                alt="project"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flip-card-back bg-zinc-300 text-stone-700 flex flex-col justify-center h-full p-2">
-              <h2 className="font-bold text-xl">
-                {handleTitleCase(pro.title)}
-              </h2>
-              <p className="pt-4 font-semibold text-ellipsis">
-                Website: {pro.website}
-              </p>
-              <p className="font-semibold">GitRepo: {pro.gitRepo}</p>
+  const handleUserProjects =
+    Array.isArray(projects) &&
+    projects?.map((pro: any) => {
+      return (
+        <Link
+          to={`/dashboard/project-details/${pro._id}`}
+          className="cursor-pointer"
+          key={pro._id}
+        >
+          <div className="flip-card w-full h-96 py-4 lg:h-80">
+            <div className="flip-card-inner shadow-lg shadow-pink-300 ">
+              <div className="flip-card-front">
+                <img
+                  src={pro.image}
+                  alt="project"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flip-card-back bg-zinc-300 text-stone-700 flex flex-col justify-center h-full p-2">
+                <h2 className="font-bold text-xl">
+                  {handleTitleCase(pro.title)}
+                </h2>
+                <p className="pt-4 font-semibold text-ellipsis">
+                  Website: {pro.website}
+                </p>
+                <p className="font-semibold">GitRepo: {pro.gitRepo}</p>
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
-    );
-  });
+        </Link>
+      );
+    });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | undefined) => {
     setValue((e?.target as HTMLInputElement).value);

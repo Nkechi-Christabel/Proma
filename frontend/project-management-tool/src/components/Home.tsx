@@ -5,7 +5,6 @@ import Logo from "../assets/logo.png";
 import Illustration from "../assets/illustration.png";
 const Home: React.FC = () => {
   const [checked, setChecked] = useState<boolean>(false);
-  // const { login } = useSelector((state: InitialState) => state.userInfo);
 
   return (
     <div className="px-4 h-full">
