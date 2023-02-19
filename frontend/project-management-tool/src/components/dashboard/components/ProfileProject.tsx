@@ -104,7 +104,7 @@ const ProfileProject: React.FC = () => {
                 <p>
                   You currently do not have any project. You can create one{" "}
                   <Link
-                    to="createproject"
+                    to="/create-project"
                     className="text-fuchsia-300 hover:text-pink-400 text-lg font-semibold"
                   >
                     here
