@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { useFormik } from "formik";
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
 import { BsCloudUpload } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { projectUpload } from "../../../redux/actions/projectActions";
@@ -34,9 +34,15 @@ const CreateProject: React.FC<{}> = () => {
   ];
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
-  const [picture, setPicture] = useState<File | null | Blob | MediaSource>(
-    null
-  );
+  const [picture, setPicture] = useState<File | null | Blob | MediaSource>();
+
+  const handleImageUpload = (
+    e: React.SyntheticEvent<EventTarget>,
+    props: FormikProps<FormValuesProject>
+  ) => {
+    setPicture((e.target as HTMLFormElement).files[0]);
+    return props.setFieldValue("image", (e.target as HTMLFormElement).files[0]);
+  };
 
   const removeImage = () => setPicture(null);
 
@@ -150,7 +156,7 @@ const CreateProject: React.FC<{}> = () => {
   };
 
   return (
-    <section className="create__project px-4 pt-28 h-full">
+    <section className="create__project px-4 mt-6 h-full">
       <Formik
         initialValues={initialValues}
         validationSchema={reviewSchema}
@@ -185,22 +191,14 @@ const CreateProject: React.FC<{}> = () => {
                     type="file"
                     accept="image/*"
                     onBlur={props.handleBlur}
-                    onChange={(e) => {
-                      setPicture(
-                        e.currentTarget.files && e.currentTarget.files[0]
-                      );
-                      return (
-                        e.currentTarget.files &&
-                        props.setFieldValue("image", e.currentTarget.files[0])
-                      );
-                    }}
+                    onChange={(e) => handleImageUpload(e, props)}
                   />
                   {picture && (
                     <div className="flex flex-col phone:w-44 mb-4 drop-shadow">
                       <img
                         className="w-full h-44 object-cover"
                         src={URL.createObjectURL(picture)}
-                        alt="Project file upload"
+                        alt="Uploaded file"
                       />
                       <button
                         className="mt-4 py-2 px-6  w-full text-white font-semibold bg-purple-600 hover:bg-fuchsia-700 rounded"

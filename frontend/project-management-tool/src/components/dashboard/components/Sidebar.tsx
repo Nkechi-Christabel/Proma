@@ -59,12 +59,12 @@ const Sidebar: React.FC<Props> = ({ checked }) => {
             </li>
           </ul>
         </nav>
-        <div
-          className="grid content-end h-4/6 px-3 -mt-12 text-stone-200"
-          onClick={() => handleLogout()}
-        >
+        <div className="grid content-end h-4/6 px-3 -mt-12 text-stone-200">
           <Link to="/">
-            <p className="font-semibold hover:bg-fuchsia-200 hover:bg-opacity-30 hover:text-stone-100 rounded pl-1 py-3">
+            <p
+              className="font-semibold hover:bg-fuchsia-200 hover:bg-opacity-30 hover:text-stone-100 rounded pl-1 py-3"
+              onClick={() => handleLogout()}
+            >
               {" "}
               <BiLogOut className="inline-block mr-2 w-5 h-5 " />
               Log out
