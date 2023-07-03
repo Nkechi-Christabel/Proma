@@ -9,9 +9,10 @@ import { logout } from "../../../redux/actions/userActions";
 
 interface Props {
   checked: boolean;
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Sidebar: React.FC<Props> = ({ checked }) => {
+const Sidebar: React.FC<Props> = ({ checked, setChecked }) => {
   const dispatch = useDispatch<any>();
 
   const handleLogout = () => {
@@ -24,6 +25,7 @@ const Sidebar: React.FC<Props> = ({ checked }) => {
         checked ? "d-block" : "hide"
       }
       }`}
+      onClick={() => setChecked((prev) => !prev)}
     >
       <div className="sidebar__nav md-bg-transparent bg-gradient-to-br from-fuchsia-500 to-fuchsia-900 h-full pt-6 ">
         <div className="md:hidden block mb-5">

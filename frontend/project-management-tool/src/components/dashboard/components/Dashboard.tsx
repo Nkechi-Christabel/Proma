@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="h-full bg-white dashboard">
       <Header setChecked={setChecked} />
-      <Sidebar checked={checked} />
+      <Sidebar checked={checked} setChecked={setChecked} />
       <Outlet />
     </div>
   );

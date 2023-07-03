@@ -100,7 +100,7 @@ const ProfileProject: React.FC = () => {
           </section>
           <section className="userProjects__section h-full pt-4">
             {!userProjects?.length && (
-              <div className="flex flex-col justify-center items-center text-center h-96 pt-10">
+              <div className="flex flex-col justify-center items-center text-center h-96 pt-10 px-1">
                 <p>
                   You currently do not have any project. You can create one{" "}
                   <Link
